@@ -1,5 +1,9 @@
 "use client"
-import Map from '@/app/components/map';
+import dynamic from 'next/dynamic';
+
+const Map = dynamic(() => import('@/app/components/map'), {
+  ssr: false,
+});
 import React, { useEffect, useState } from 'react'
 import styles from "../../../styles/explore.module.css";
 interface MarkerData {
@@ -17,7 +21,20 @@ const Explore = () => {
 
   const getLocation = () => {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      window.navigator.geolocation.getCurrentPosition(function (position) {
+        
+      }, function (error) {
+        console.error("Error getting geolocation:", error);
+      },
+      { enableHighAccuracy: true } 
+      );
+    } else {
+      console.error("Geolocation is not supported by your browser.");
+    }
+  };
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'geolocation' in window.navigator) {
+      window.navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
         setMarkers([{
@@ -30,11 +47,8 @@ const Explore = () => {
       { enableHighAccuracy: true } 
       );
     } else {
-      console.error("Geolocation is not supported by your browser.");
+      console.log('Geolocation is not available in this browser or environment.');
     }
-  };
-  useEffect(() => {
-      getLocation();
   }, [])
   
   return (
@@ -49,7 +63,7 @@ const Explore = () => {
       ) }
       <div className={styles.content}>
         <div className={styles.left}>
-        {(latitude && longitude) ? (<Map markers={markers}/>) : <p>Select Location</p>}
+        {(latitude && longitude && typeof window !== 'undefined') ? (<Map markers={markers}/>) : <p>Select Location</p>}
         </div>
         <div className={styles.right}>
           <h3>Lenders</h3>

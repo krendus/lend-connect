@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-const defaultMarker = new L.Icon({
-    iconUrl: icon.src,
-    shadowUrl: iconShadow.src,
-});
-L.Marker.prototype.options.icon = defaultMarker;
+
 interface MarkerData {
   position: [number, number];
   popupText: string;
@@ -19,6 +15,14 @@ interface MapWithMarkersProps {
 }
 
 const MapWithMarkers: React.FC<MapWithMarkersProps> = ({ markers }) => {
+    useEffect(() => {
+        const defaultMarker = new L.Icon({
+            iconUrl: icon.src,
+            shadowUrl: iconShadow.src,
+        });
+        L.Marker.prototype.options.icon = defaultMarker;
+    }, [])
+    
   return (
     <MapContainer center={markers[0].position} zoom={14} style={{ height: "400px" }}>
       <TileLayer
