@@ -1,0 +1,64 @@
+.container {
+    padding: 20px;
+}
+.head + p {
+    font-size: 14px;
+}
+.content {
+    display: flex;
+    margin-top: 30px;
+}
+.left {
+    width: 70%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.left p {
+    text-align: center;
+}
+.right {
+    width: 30%;
+    min-width: 250px;
+    padding: 15px;
+}
+.right p {
+    font-size: 14px;
+    color: #333;
+}
+.lenders {
+    margin-top: 20px;
+}
+.lender {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(42, 41, 57, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.lender button {
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    cursor: pointer;
+}
+.notify {
+    font-size: 14px;
+    margin-top: 20px;
+}
+.btn {
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    cursor: pointer;
+}

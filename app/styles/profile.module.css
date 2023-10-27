@@ -1,0 +1,96 @@
+.container {
+    padding: 20px;
+}
+.profilePic {
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.tag {
+    background: #333;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 50px;
+    padding: 5px 16px;
+    width: 10px;
+    text-align: center;
+    min-width: max-content;
+    margin: 10px auto;
+}
+.inputFlex {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: calc(50% - 10px);
+}
+.inputContainer label {
+    font-size: 14px;
+    color: #777;
+    font-weight: 500;
+}
+.inputContainer input, .inputContainer select {
+    height: 40px;
+    background: transparent;
+    width: 100%;
+    border-radius: 99px;
+    border: 1px solid rgba(42, 41, 57, 0.1);
+    padding: 7px 15px;
+    font-size: 14px;
+    outline: none;
+    color: #000;
+    margin-top: 5px;
+}
+.wrapper {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 800px;
+}
+.wrapper h3 {
+    margin: 20px 0;
+}
+.guarantor {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(42, 41, 57, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.guarantor h4 {
+    font-size: 16px;
+}
+.guarantor p {
+    font-size: 14px;
+}
+.guarantor button {
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    cursor: pointer;
+}
+.btn {
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    cursor: pointer;
+    margin-top: 20px;
+}
