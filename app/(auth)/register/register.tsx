@@ -65,7 +65,7 @@ const handleLoaded = () => {
     <div className={styles.container}>
         <Script 
         type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkZraD0rt4dP0TslLVMexomnye48jFcW0&libraries=places"
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`}
         onLoad={handleLoaded}
         />
         <form className={styles.form}>
