@@ -25,7 +25,7 @@ const Profile = () => {
   return (
     <div className={styles.container}>
         <div className={styles.profilePic}>
-            <Image src={userImage} alt='logo' height={150} width={150}/> 
+            <Image src={userImage} alt='logo' height={150} width={150} style={{ objectPosition: "center", objectFit: "cover" }}/> 
         </div>
         <div className={styles.tag}>Agent</div>
         <div className={styles.wrapper}>

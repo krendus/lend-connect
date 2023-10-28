@@ -9,7 +9,7 @@ const TopNav = () => {
         <div className={styles.right}>
             <p>Samuel Lawal</p>
             <div className={styles.logo}>
-                <Image src={userImage} alt='logo' height={40} width={40}/> 
+                <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
             </div>
         </div>
     </div>

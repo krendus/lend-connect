@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import parser from 'html-react-parser'
 
 interface MarkerData {
   position: [number, number];
@@ -24,14 +25,14 @@ const MapWithMarkers: React.FC<MapWithMarkersProps> = ({ markers }) => {
     }, [])
     
   return (
-    <MapContainer center={markers[0].position} zoom={14} style={{ height: "400px" }}>
+    <MapContainer center={markers[0].position} zoom={13} style={{ height: "400px" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       {markers.map((marker, index) => (
         <Marker position={marker.position} key={index}>
-          <Popup>{marker.popupText}</Popup>
+          <Popup>{parser(marker.popupText)}</Popup>
         </Marker>
       ))}
     </MapContainer>

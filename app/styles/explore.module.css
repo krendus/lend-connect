@@ -9,7 +9,7 @@
     margin-top: 30px;
 }
 .left {
-    width: 70%;
+    width: 65%;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -17,7 +17,7 @@
     text-align: center;
 }
 .right {
-    width: 30%;
+    width: 35%;
     min-width: 250px;
     padding: 15px;
 }
@@ -27,6 +27,9 @@
 }
 .lenders {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
 }
 .lender {
     padding: 15px;
@@ -35,6 +38,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 10px;
 }
 .lender button {
     border: none;
@@ -61,4 +65,25 @@
     padding: 5px 10px;
     height: 35px;
     cursor: pointer;
+}
+.center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    min-height: 40px;
+    min-width: 40px;
+}
+.loc {
+    font-size: 12px !important;
+    color: green !important;
+    font-weight: 500;
 }
