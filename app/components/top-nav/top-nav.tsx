@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import userImage from '../../assets/user.jpg';
 import styles from './style.module.css';
 import { getUser, useSelector } from '@/lib/redux';
 

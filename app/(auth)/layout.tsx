@@ -9,7 +9,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
      if(token) {
         router.replace("/dashboard")
-        setAuthenticated(true)
+        setAuthenticated(true);
      } else {
         setAuthenticated(false)
      }

@@ -38,7 +38,7 @@ const Login = () => {
       localStorage.setItem("lendconnect-token", res.data.data.token);
       router.replace("/dashboard");
     }).catch((e: any) => {
-      if(e.response.data.message) {
+      if(e?.response?.data?.message) {
         toast.error(e.response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });

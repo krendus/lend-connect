@@ -8,6 +8,7 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
+    border: 1px solid;
 }
 .tag {
     background: #333;

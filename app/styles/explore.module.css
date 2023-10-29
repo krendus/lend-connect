@@ -81,6 +81,7 @@
     position: relative;
     min-height: 40px;
     min-width: 40px;
+    border: 1px solid black;
 }
 .loc {
     font-size: 12px !important;
