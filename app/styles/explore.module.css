@@ -53,7 +53,7 @@
 }
 .notify {
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .btn {
     border: none;
@@ -86,4 +86,32 @@
     font-size: 12px !important;
     color: green !important;
     font-weight: 500;
+}
+.tabContainer {
+    height: 46px;
+    padding: 3px;
+    border-radius: 99px;
+    width: 200px;
+    background: #eee;
+    margin: 20px auto;
+}
+.tab {
+    width: 97px;
+    border-radius: 99px;
+    outline: none;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.tabActive {
+    height: 40px;
+    width: 97px;
+    border-radius: 99px;
+    outline: none;
+    background: #000;
+    border: none;
+    color: #fff;
+    cursor: pointer;
 }

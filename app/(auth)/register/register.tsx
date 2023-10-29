@@ -6,11 +6,16 @@ import logo from '../../assets/logo.png'
 import Link from 'next/link'
 import styles from '../../styles/auth.module.css';
 import Script from 'next/script'
+import { toast } from 'react-toastify'
+import { registerUser } from '@/app/api/auth'
+import { useRouter } from 'next/navigation'
+import { Dots } from 'react-activity'
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const autoCompleteRef = useRef<any>(null);
@@ -21,12 +26,15 @@ const Register = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [selected, setSelected] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const options = {
     componentRestrictions: { country: "ng" },
     fields: ["address_components", "geometry", "icon", "name"],
     types: ["establishment"]
   };
-const handleLoaded = () => {
+  const router = useRouter();
+  const handleLoaded = () => {
     autoCompleteRef.current = new (window as any).google.maps.places.Autocomplete(
         inputRef.current,
         options
@@ -60,6 +68,62 @@ const handleLoaded = () => {
         }
     })
   }
+  const handleRegister = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if(loading) return;
+    setLoading(true);
+    if( !firstname || !lastname || !email || !selected || !country || !confirmPassword || !password || !phone) {
+      toast.error("Fill in required fields", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      setLoading(false);
+      return;
+    }
+    if(password != confirmPassword) {
+      toast.error("Password does not match", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      setLoading(false);
+      return;
+    }
+
+    registerUser({
+      firstname,
+      lastname,
+      email,
+      password,
+      password_confirmation: confirmPassword,
+      phone,
+      accept_terms: 1,
+      location: {
+        address,
+        longitude,
+        latitude,
+        city,
+        country
+      }
+    }).then((res) => {
+      // dispatch(setUser(res.data.data))
+      toast.success(res.data.message, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      router.push("/");
+    }).catch((e: any) => {
+      if(e.response.data.message) {
+        toast.error(e.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        setLoading(false);
+        return;
+      }
+      if(e.message) {
+        toast.error(e.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      setLoading(false);
+    })
+  }
  
   return (
     <div className={styles.container}>
@@ -74,12 +138,21 @@ const handleLoaded = () => {
             </div>
             <h3>LendConnect Register</h3>
             <div className={styles.inputContainer}>
-                <label>Fullname</label>
+                <label>Firstname</label>
                 <input
                  type='text'
                  placeholder='Enter your fullname'
-                 value={fullname}
-                 onChange={(e) => setFullname(e.target.value)}
+                 value={firstname}
+                 onChange={(e) => setFirstname(e.target.value)}
+                 />
+            </div>
+            <div className={styles.inputContainer}>
+                <label>Lastname</label>
+                <input
+                 type='text'
+                 placeholder='Enter your fullname'
+                 value={lastname}
+                 onChange={(e) => setLastname(e.target.value)}
                  />
             </div>
             <div className={styles.inputContainer}>
@@ -124,8 +197,17 @@ const handleLoaded = () => {
                  onChange={(e) => setPassword(e.target.value)}
                  />
             </div>
+            <div className={styles.inputContainer}>
+                <label>Confirm Password</label>
+                <input
+                 type='password'
+                 placeholder='Confirm your password'
+                 value={confirmPassword}
+                 onChange={(e) => setConfirmPassword(e.target.value)}
+                 />
+            </div>
             <p className={styles.notifyText}>Already have an account? <Link href={"/"}>Login</Link></p>
-            <button className={styles.submitBtn}>Register</button>
+            <button className={styles.submitBtn} onClick={handleRegister}>{loading ? <Dots color='#fff'/> : "Register"}</button>
         </form>
     </div>
   )

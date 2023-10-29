@@ -1,9 +1,25 @@
-import React, { FC } from 'react'
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-const Layout:FC<React.PropsWithChildren> = ({ children }) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+    const token = typeof window !== "undefined" && localStorage.getItem("lendconnect-token");
+    const [authenticated, setAuthenticated] = useState(true);
+    const router = useRouter();
+    useEffect(() => {
+     if(token) {
+        router.replace("/dashboard")
+        setAuthenticated(true)
+     } else {
+        setAuthenticated(false)
+     }
+    }, [token])
+    
     return (
-        <div>{children}</div>
-    )
-}
+        <div>
+           {!authenticated ? children : null } 
+        </div>
+    );
+};
 
-export default Layout
+export default AuthLayout;

@@ -19,6 +19,7 @@ const Explore = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isAgent, setIsAgent] = useState(true);
   const [markers, setMarkers] = useState<MarkerData[]>([{
     position: [0, 0],
     popupText: ""
@@ -54,47 +55,99 @@ const Explore = () => {
     <div className={styles.container}>
       <h2 className={styles.head}>Explore</h2>
       <p>Search for agents within you vicinity.</p>
-      {!(latitude && longitude) && (
-        <div className={styles.notify}>
-          <p>Allow location to search vicinity</p>
-          <button className={styles.btn} onClick={getLocation}>Allow Location</button>
-        </div>
-      ) }
-      <div className={styles.content}>
-        <div className={styles.left}>
-        {(latitude && longitude && typeof window !== 'undefined') ? (<Map markers={markers}/>) : loading ? <div className={styles.center}><Dots color='black'/></div> : <div className={styles.center}><p>Allow Location to view map</p></div>} 
-        </div>
-        <div className={styles.right}>
-          <h3>Agents</h3>
-          <p>Note you can't apply above your current limit</p>
-          <div className={styles.lenders}>
-            <div className={styles.lender}>
-              <div className={styles.logo}>
-                  <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <div>
-                  <h4>Samuel Lawal</h4>
-                  <p className={styles.loc}>9km from you</p>
-                </div>
-                <button>Apply</button>
-              </div>
-            </div>
-            <div className={styles.lender}>
-              <div className={styles.logo}>
-                  <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <div>
-                  <h4>Aaron Musk</h4>
-                  <p className={styles.loc}>24km from you</p>
-                </div>
-                <button>Apply</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className={styles.tabContainer}>
+        <button className={isAgent ? styles.tabActive : styles.tab} onClick={() => setIsAgent(true)}>Agent</button>
+        <button className={!isAgent ? styles.tabActive : styles.tab} onClick={() => setIsAgent(false)}>Lendings</button>
       </div>
+      {
+        isAgent ? (
+          <>
+            {!(latitude && longitude) && (
+              <div className={styles.notify}>
+                <button className={styles.btn} onClick={getLocation}>Allow Location</button>
+              </div>
+            ) }
+            <div className={styles.content}>
+              <div className={styles.left}>
+              {(latitude && longitude) ? (<Map markers={markers}/>) : loading ? <div className={styles.center}><Dots color='black'/></div> : <div className={styles.center}><p>Allow Location to view map</p></div>} 
+              </div>
+              <div className={styles.right}>
+                <h3>Agents</h3>
+                <p>Note you can't apply above your current limit</p>
+                <div className={styles.lenders}>
+                  <div className={styles.lender}>
+                    <div className={styles.logo}>
+                        <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <div>
+                        <h4>Samuel Lawal</h4>
+                        <p className={styles.loc}>9km from you</p>
+                      </div>
+                      <button>Apply</button>
+                    </div>
+                  </div>
+                  <div className={styles.lender}>
+                    <div className={styles.logo}>
+                        <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <div>
+                        <h4>Aaron Musk</h4>
+                        <p className={styles.loc}>24km from you</p>
+                      </div>
+                      <button>Apply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            {!(latitude && longitude) && (
+              <div className={styles.notify}>
+                <button className={styles.btn} onClick={getLocation}>Allow Location</button>
+              </div>
+            ) }
+            <div className={styles.content}>
+              <div className={styles.left}>
+              {(latitude && longitude) ? (<Map markers={markers}/>) : loading ? <div className={styles.center}><Dots color='black'/></div> : <div className={styles.center}><p>Allow Location to view map</p></div>} 
+              </div>
+              <div className={styles.right}>
+                <h3>Lendings</h3>
+                <p>Note you can't apply above your current limit</p>
+                <div className={styles.lenders}>
+                  <div className={styles.lender}>
+                    <div className={styles.logo}>
+                        <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <div>
+                        <h4>₦ 50,000</h4>
+                        <p className={styles.loc}>9km from you</p>
+                      </div>
+                      <button>Apply</button>
+                    </div>
+                  </div>
+                  <div className={styles.lender}>
+                    <div className={styles.logo}>
+                        <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <div>
+                        <h4>₦ 100,000</h4>
+                        <p className={styles.loc}>24km from you</p>
+                      </div>
+                      <button>Apply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      }
     </div>
   )
 }
