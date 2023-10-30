@@ -7,6 +7,7 @@ import { setUser, useDispatch } from '@/lib/redux';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { getUserProfile } from '../api/auth';
+import BottomNav from '../components/bottom-nav/bottom-nav';
 
 const Layout:FC<React.PropsWithChildren> = ({ children }) => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const Layout:FC<React.PropsWithChildren> = ({ children }) => {
               <div className={styles.child}>
                 {children}
               </div>
+              <BottomNav />
             </div>
           </div>
         ): null

@@ -19,5 +19,11 @@ export const updateLending = (body: any) => {
     return axiosInstance().patch("/lendings", body);
 }
 export const applyForLoan = (body: any) => {
-    return axiosInstance().post("/loan-applications", body)
+    return axiosInstance().post("/applications", body);
+}
+export const getLoanApplications = () => {
+    return axiosInstance().get("/applications");
+}
+export const getSingleApplication = (id: string) => {
+    return axiosInstance().get(`/applications/${id}`)
 }

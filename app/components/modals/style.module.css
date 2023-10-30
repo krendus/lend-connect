@@ -67,3 +67,24 @@
     font-weight: 600;
     background: #000;
 }
+.details {
+    margin: 10px 0;
+}
+.details h4 {
+    font-weight: 500;
+    font-size: 16px;
+}
+.details p {
+    font-size: 14px;
+    color: #444;
+}
+@media screen and (max-width: 900px) {
+    .details h4 {
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .details p {
+        font-size: 13px;
+        color: #444;
+    }
+}

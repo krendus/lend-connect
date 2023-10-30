@@ -10,7 +10,8 @@ const AgentLendings = () => {
   const fetchLendings = () => {
     fetchAgentAssignedLendings()
     .then((res) => {
-        setLendings(res.data.data)
+        setLendings(res.data.data.data);
+        setLoading(false);
     })
     .catch((e: any) => {
         if(e?.response?.data?.message) {
@@ -35,8 +36,9 @@ const AgentLendings = () => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h3>Lendings</h3>
+        <h3>Agent Lendings</h3>
       </div>
+      <div className={styles.table}>
       <div className={styles.rowB}>
         <div>Type</div>
         <div>Status</div>
@@ -46,21 +48,26 @@ const AgentLendings = () => {
       </div>
       {
         loading ? (
-          <Dots color='#000' />
+          <div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}><Dots color='#000'/></div>
         ) : (
+          lendings.length ?
           lendings.map((lending: any) => (
             <div className={styles.row}>
-              <div>Loan</div>
-              <div>Ongoing</div>
+              <div>{lending.interest_rate}%</div>
+              <div>{lending.status}</div>
               <div>{lending.currency} {lending.amount}</div>
-              <div>10th October, 2021</div>
+              <div>{lending.tenure_count} {lending.tenure_type}(s)</div>
               <div>
                 <button>View</button>
               </div>
             </div>
           ))
+          : (
+            <div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}>No lendings</div>
+          )
         )
       }
+      </div>
     </div>
   )
 }

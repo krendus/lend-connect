@@ -116,3 +116,44 @@
     color: #fff;
     cursor: pointer;
 }
+@media screen and (max-width: 900px) {
+    .tabContainer {
+        margin: 10px auto;
+    }
+    .tab {
+        font-size: 13px;
+    }
+    .head {
+        text-align: center;
+    }
+    .head + p {
+        font-size: 13px;
+        text-align: center;
+    }
+    .content {
+        flex-direction: column;
+    }
+    .left {
+        width: 100%;
+    }
+    .right {
+        width: 100%;
+        padding: 10px 0;
+    }
+    .right p {
+        font-size: 13px;
+    }
+    .right h3 {
+        text-align: center;
+    }
+    .right h3 + p {
+        text-align: center;
+    }
+    .lenders {
+        margin-top: 10px;
+    }
+    .notify {
+        display: flex;
+        justify-content: center;
+    }
+}

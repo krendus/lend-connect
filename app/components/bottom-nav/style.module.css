@@ -1,21 +1,18 @@
 .container {
-    width: 220px;
-    max-width: 220px;
-    padding: 10px;
-    border-right: 1px solid rgba(42, 41, 57, 0.1);
-}
-.logo {
-    display: flex;
-    column-gap: 10px;
-    align-items: center;
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid rgba(42, 41, 57, 0.1);
+    display: none;
+    padding: 4px;
 }
 .navLinks {
     display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+    width: 100%;
 }
 .navLink {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     column-gap: 7px;
     margin: 2px 0;
     background: transparent;
@@ -23,29 +20,31 @@
     border: none;
     padding: 7px 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 15px;
     color: #333;
+    width: calc(100% /6);
 }
 .aNavLink {
     display: flex;
     column-gap: 7px;
+    flex-direction: column;
+    align-items: center;
     margin: 2px 0;
     background: transparent;
     outline: none;
     border: none;
     padding: 7px 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 15px;
     background: #222;
     color: #fff;
+    width: calc(100% /6);
 }
-.navLink:hover {
-    background: #ddd;
-}
+
 .navLink svg {
     height: 22px;
     width: 22px;
@@ -60,6 +59,6 @@
 }
 @media screen and (max-width: 900px) {
     .container {
-        display: none;
+        display: flex;
     }
 }

@@ -33,3 +33,47 @@
     background: #000;
     margin: 0 auto;
 }
+.btn {
+    border: none;
+    display: none;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 500;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.btn svg {
+    height: 17px;
+    width: 17px;
+}
+@media screen and (max-width: 900px) {
+    .container {
+        justify-content: left;
+        padding: 0 25px;
+    }
+    .right {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .right p {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .tag {
+        font-weight: 500;
+        font-size: 9px !important;
+        margin: 0;
+    }
+    .btn {
+        display: flex;
+    }
+}

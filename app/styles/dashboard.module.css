@@ -53,3 +53,28 @@
 .table {
     margin-top: 20px;
 }
+@media screen and (max-width: 900px) {
+    .container {
+        padding: 10px 25px;
+    }
+    .cardContainer {
+        gap: 8px;
+    }
+    .card p {
+        font-size: 13px;
+    }
+    .heading h3 {
+        margin-top: 20px;
+        font-size: 17px;
+    }
+    .row, .rowB {
+        min-width: 800px;
+    }
+    .row div, .rowB div {
+        font-size: 13px;
+    }
+    .table {
+        margin-top: 20px;
+        overflow-x: scroll;
+    }
+}

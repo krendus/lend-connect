@@ -9,13 +9,10 @@ import { Dots } from 'react-activity'
 import { getUserProfile } from '@/app/api/auth';
 
 const Profile = () => {
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
     const user = useSelector(getUser);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [address, setAddress] = useState("");
@@ -118,7 +115,7 @@ const Profile = () => {
                     <button className={styles.btn} onClick={becomeAnAgent} style={{ width: "130px" }}>{loading ? <Dots color='#fff'/> : "Become an agent"}</button>
                 ) : null
             }
-            <h3>Guarantors</h3>
+            {/* <h3>Guarantors</h3>
             <div className={styles.guarantor}>
                 <div>
                     <h4>Samuel Lawal</h4>
@@ -126,7 +123,7 @@ const Profile = () => {
                 </div>
                 <button>Remove</button>
             </div>
-            <button className={styles.btn}>Add Guarantor</button>
+            <button className={styles.btn}>Add Guarantor</button> */}
         </div>
     </div>
   )

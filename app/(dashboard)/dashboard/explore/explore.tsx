@@ -155,11 +155,11 @@ const Explore = () => {
     setLoading(true);
     fetchNearbyAgents();
   }
-  const apply = (lending_id: string) => {
+  const apply = (lending_id: string, agent_id: string) => {
     if(loadingL) return;
     setLoadingL(true);
     applyForLoan({
-        agent_id: Number(agentId),
+        agent_id: Number(agent_id),
         lending_id: Number(lending_id)
     })
     .then((res) => {
@@ -196,7 +196,7 @@ const Explore = () => {
       <h2 className={styles.head}>Explore</h2>
       <p>Search for agents / lendings within your vicinity.</p>
       <div className={styles.tabContainer}>
-        <button className={isAgent ? styles.tabActive : styles.tab} onClick={() => setTabAgents()}>Agent</button>
+        <button className={isAgent ? styles.tabActive : styles.tab} onClick={() => setTabAgents()}>Agents</button>
         <button className={!isAgent ? styles.tabActive : styles.tab} onClick={() => setTabLendings()}>Lendings</button>
       </div>
       {
@@ -216,7 +216,7 @@ const Explore = () => {
                 <p>Note you can't apply above your current loan limit</p>
                 {
                   loading ? (
-                    <Dots color='black' />
+                    <div className={styles.center}><Dots color='black' /></div>
                   ) : (
                     <div className={styles.lenders}>
                       {
@@ -263,7 +263,7 @@ const Explore = () => {
                 <p>Note you can't apply above your current limit</p>
                 {
                   loading ? (
-                    <Dots color='black' />
+                    <div className={styles.center}><Dots color='black' /></div>
                   ) : (
                     <div className={styles.lenders}>
                       {
@@ -279,7 +279,7 @@ const Explore = () => {
                                           <h4>{lending.currency} {lending.amount}</h4>
                                           <p className={styles.loc}>{distance.toFixed(2)}km from you</p>
                                       </div>
-                                      <button onClick={() => apply(lending.id)}>{loadingL ? <Dots color='#fff'/> : "Apply"}</button>
+                                      <button onClick={() => apply(lending.id, lending.agent.id)}>{loadingL ? <Dots color='#fff'/> : "Apply"}</button>
                                       </div>
                                   </div>
                               )

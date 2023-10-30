@@ -66,3 +66,15 @@
     font-weight: 600;
     background: #000;
 }
+@media screen and (max-width: 900px) {
+    .form {
+        padding: 30px 20px;
+        border: none;
+    }
+    .inputContainer label {
+        font-size: 13px;
+    }
+    .inputContainer input, .inputContainer select {
+        font-size: 13px;
+    }
+}

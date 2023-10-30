@@ -95,3 +95,22 @@
     cursor: pointer;
     margin-top: 20px;
 }
+@media screen and (max-width: 900px) {
+    .container {
+        padding: 20px;
+    }
+    .inputFlex {
+       flex-direction: column;
+       gap: 10px;
+    }
+    .inputContainer {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .inputContainer label {
+        font-size: 13px;
+    }
+    .inputContainer input, .inputContainer select {
+        font-size: 13px;
+    }
+}

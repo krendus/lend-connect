@@ -10,7 +10,8 @@ const UserLendings = () => {
   const fetchLendings = () => {
     fetchAgentAssignedLendings()
     .then((res) => {
-        setLendings(res.data.data)
+        setLendings(res.data.data.data)
+        setLoading(false);
     })
     .catch((e: any) => {
         if(e?.response?.data?.message) {
@@ -38,27 +39,31 @@ const UserLendings = () => {
       </div>
       <div className={styles.table}>
         <div className={styles.rowB}>
-          <div>Type</div>
+          <div>Interest Rate</div>
           <div>Status</div>
           <div>Amount</div>
-          <div>Date</div>
+          <div>Tenure</div>
           <div>Action</div>
         </div>
         {
           loading ? (
-            <Dots color='#000' />
+            (<div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}><Dots color='#000'/></div>)
           ) : (
+            lendings.length ?
             lendings.map((lending: any) => (
               <div className={styles.row}>
-                <div>Loan</div>
-                <div>Ongoing</div>
+                <div>{lending.interest_rate}%</div>
+                <div>{lending.status}</div>
                 <div>{lending.currency} {lending.amount}</div>
-                <div>10th October, 2021</div>
+                <div>{lending.tenure_count} {lending.tenure_type}(s)</div>
                 <div>
                   <button>View</button>
                 </div>
               </div>
             ))
+            : (
+              <div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}>No lendings</div>
+            )
           )
         }
       </div>
