@@ -83,7 +83,7 @@ const AgentApplicationModal: FC<IAgent> = ({ applicationId, setShowModal }) => {
             </div>
             <div className={styles.details}>
                 <h4>Interest</h4>
-                <p>{application?.lending?.interest_rate}</p>
+                <p>{application?.lending?.interest_rate}%</p>
             </div>
             <div className={styles.details}>
                 <h4>Status</h4>
