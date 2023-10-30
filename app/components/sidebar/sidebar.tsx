@@ -32,13 +32,17 @@ const Sidebar = () => {
                 <ExploreIcon />
                 <span>Explore</span>
             </button>
-            <button className={pathname.includes("/dashboard/requests") ? styles.aNavLink : styles.navLink} onClick={() => router.push("/dashboard/requests")}>
+            <button className={pathname.includes("/dashboard/applications") ? styles.aNavLink : styles.navLink} onClick={() => router.push("/dashboard/applications")}>
                 <SupportIcon />
-                <span>Requests</span>
+                <span>Applications</span>
             </button>
             <button className={pathname.includes("/dashboard/loans") ? styles.aNavLink : styles.navLink} onClick={() => router.push("/dashboard/loans")}>
                 <WalletIcon />
                 <span>Loans</span>
+            </button>
+            <button className={pathname.includes("/dashboard/lendings") ? styles.aNavLink : styles.navLink} onClick={() => router.push("/dashboard/lendings")}>
+                <WalletIcon />
+                <span>Lendings</span>
             </button>
             <button className={pathname.includes("/dashboard/profile") ? styles.aNavLink : styles.navLink} onClick={() => router.push("/dashboard/profile")}>
                 <UserIcon />

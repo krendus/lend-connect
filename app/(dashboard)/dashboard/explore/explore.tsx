@@ -11,6 +11,9 @@ import { Dots } from 'react-activity';
 import Image from 'next/image';
 import userImage from '../../../assets/user.jpg';
 import { exploreAgents, exploreLendings } from '@/app/api/explore';
+import AgentModal from '@/app/components/modals/agent/agent';
+import { haversineDistance } from '@/lib/util';
+import { applyForLoan } from '@/app/api/loans';
 interface MarkerData {
   position: [number, number];
   popupText: string;
@@ -23,6 +26,9 @@ const Explore = () => {
   const [isAgent, setIsAgent] = useState(true);
   const [agents, setAgents] = useState([]);
   const [lendings, setLendings] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [agentId, setAgentId] = useState("");
+  const [loadingL, setLoadingL] = useState(false);
   const [markers, setMarkers] = useState<MarkerData[]>([{
     position: [0, 0],
     popupText: ""
@@ -31,26 +37,6 @@ const Explore = () => {
     position: [0, 0],
     popupText: ""
   }]);
-  function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-    const radius = 6371.0;
-  
-    const lat1Rad = (Math.PI / 180) * lat1;
-    const lon1Rad = (Math.PI / 180) * lon1;
-    const lat2Rad = (Math.PI / 180) * lat2;
-    const lon2Rad = (Math.PI / 180) * lon2;
-
-    const dLon = lon2Rad - lon1Rad;
-    const dLat = lat2Rad - lat1Rad;
-  
-    const a =
-      Math.sin(dLat / 2) ** 2 +
-      Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
- 
-    const distance = radius * c;
-  
-    return distance;
-  }
   
 
   const fetchNearbyAgents = (lat?: number, long?: number) => {
@@ -99,16 +85,18 @@ const Explore = () => {
     if(rLat && rLong) {
       exploreLendings(`${rLat},${rLong}`)
       .then((res) => {
-        const resData = res.data.data.data;
+        const resData = res.data.data;
         if(resData) {
           const resMarker: MarkerData[] = [];
           setLendings(resData);
           resData.forEach((agent: any) => {
+            const distance = haversineDistance(rLat, rLong, agent.lender.location.latitude, agent.lender.location.longitude)
             resMarker.push({
-              position: [agent.location.latitude, agent.location.longitude],
-              popupText: `<h4 style='margin: 1px 0;'>${agent.firstname} ${agent.lastname}</h4><p style='color: green; font-size: 12px; margin: 1px 0;'>9km from you</p>`
+              position: [agent.lender.location.latitude, agent.lender.location.longitude],
+              popupText: `<h4 style='margin: 1px 0;'>${agent.amount}</h4><p style='color: green; font-size: 12px; margin: 1px 0;'>${distance.toFixed()}km from you</p>`
             })
           })
+          console.log(resMarker)
           setLendingMarkers((prevMarker) => {
             let adjusted = [...prevMarker, ...resMarker]
             return adjusted;
@@ -167,6 +155,33 @@ const Explore = () => {
     setLoading(true);
     fetchNearbyAgents();
   }
+  const apply = (lending_id: string) => {
+    if(loadingL) return;
+    setLoadingL(true);
+    applyForLoan({
+        agent_id: Number(agentId),
+        lending_id: Number(lending_id)
+    })
+    .then((res) => {
+        toast.success("Loan application submitted successfully");
+        setLoadingL(false);
+    })
+    .catch((e: any) => {
+        if(e?.response?.data?.message) {
+            toast.error(e.response.data.message, {
+            position: toast.POSITION.TOP_RIGHT
+            });
+            setLoadingL(false);
+            return;
+        }
+        if(e.message) {
+            toast.error(e.message, {
+            position: toast.POSITION.TOP_RIGHT
+            });
+        }
+        setLoadingL(false);
+        });
+  } 
   const setTabLendings = () => {
     setIsAgent(false);
     setLoading(true);
@@ -217,7 +232,10 @@ const Explore = () => {
                                 <h4>{agent.firstname} {agent.lastname}</h4>
                                 <p className={styles.loc}>{distance.toFixed(2)}km from you</p>
                               </div>
-                              <button>Apply</button>
+                              <button onClick={() => {
+                                setShowModal(true);
+                                setAgentId(agent.id)
+                              }}>Use</button>
                             </div>
                           </div>
                         )
@@ -248,30 +266,25 @@ const Explore = () => {
                     <Dots color='black' />
                   ) : (
                     <div className={styles.lenders}>
-                      <div className={styles.lender}>
-                        <div className={styles.logo}>
-                            <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                          <div>
-                            <h4>₦ 50,000</h4>
-                            <p className={styles.loc}>9km from you</p>
-                          </div>
-                          <button>Apply</button>
-                        </div>
-                      </div>
-                      <div className={styles.lender}>
-                        <div className={styles.logo}>
-                            <Image src={userImage} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                          <div>
-                            <h4>₦ 100,000</h4>
-                            <p className={styles.loc}>24km from you</p>
-                          </div>
-                          <button>Apply</button>
-                        </div>
-                      </div>
+                      {
+                          lendings.map((lending: any, i) => {
+                              const distance = haversineDistance(latitude, longitude, lending.lender.location.latitude, lending.lender.location.longitude)
+                              return (
+                                  <div className={styles.lender} key={i}>
+                                      <div className={styles.logo}>
+                                          <Image src={lending.lender.profile_pic} alt='logo' height={40} width={40} style={{ objectPosition: "center", objectFit: "cover" }}/> 
+                                      </div>
+                                      <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                                      <div>
+                                          <h4>{lending.currency} {lending.amount}</h4>
+                                          <p className={styles.loc}>{distance.toFixed(2)}km from you</p>
+                                      </div>
+                                      <button onClick={() => apply(lending.id)}>{loadingL ? <Dots color='#fff'/> : "Apply"}</button>
+                                      </div>
+                                  </div>
+                              )
+                          })
+                      }
                     </div>
                   )
                 }
@@ -280,6 +293,7 @@ const Explore = () => {
           </>
         )
       }
+      {showModal && <AgentModal agentId={agentId} setShowModal={setShowModal} longitude={longitude} latitude={latitude}/>}
     </div>
   )
 }

@@ -5,7 +5,7 @@ const AgentLoans = () => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h3>Loans</h3>
+        <h3>Agent Loans</h3>
       </div>
       <div className={styles.table}>
         <div className={styles.rowB}>

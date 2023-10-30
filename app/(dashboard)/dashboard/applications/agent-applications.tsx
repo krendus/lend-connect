@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from '../../../styles/dashboard.module.css';
 
-const UserRequests = () => {
+const AgentApplications = () => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h3>Requests</h3>
+        <h3>Agent Applications</h3>
       </div>
       <div className={styles.table}>
         <div className={styles.rowB}>
@@ -47,5 +47,5 @@ const UserRequests = () => {
   )
 }
 
-export default UserRequests;
+export default AgentApplications;
 

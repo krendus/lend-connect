@@ -1,5 +1,5 @@
 import React from 'react'
-import Requests from './requests'
+import Requests from './applications'
 
 const Page = () => {
   return (

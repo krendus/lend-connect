@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useState } from 'react'
-import UserLoans from './user-loans'
+import UserLendings from './user-lendings'
 import styles from '../../../styles/explore.module.css'
-import AgentLoans from './agent-loans'
+import AgentLendings from './agent-lendings'
 
 const Applications = () => {
   const [isAgent, setIsAgent] = useState(false);
@@ -14,7 +14,7 @@ const Applications = () => {
         <button className={isAgent ? styles.tabActive : styles.tab} onClick={() => setIsAgent(true)}>Agent</button>
       </div>
       <div>
-        {isAgent ? <AgentLoans /> : <UserLoans /> }
+        {isAgent ? <AgentLendings /> : <UserLendings /> }
       </div>
     </>
   )

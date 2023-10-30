@@ -1,7 +1,10 @@
+"use client"
 import React from 'react'
 import styles from '../../styles/dashboard.module.css';
+import { getUser, useSelector } from '@/lib/redux';
 
 const UserDashboard = () => {
+  const user = useSelector(getUser);
   return (
     <div className={styles.container}>
       <div className={styles.cardContainer}>
@@ -23,7 +26,7 @@ const UserDashboard = () => {
         </div>
         <div className={styles.card}>
           <p>Loan Limit</p>
-          <h1>₦ 50,000</h1>
+          <h1>₦ {user?.kyc_level?.loan_limit}</h1>
         </div>
         <div className={styles.card}>
           <p>Total Amount Disbursed</p>

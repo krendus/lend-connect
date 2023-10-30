@@ -5,7 +5,7 @@ const UserRequests = () => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h3>Requests</h3>
+        <h3>Applications</h3>
       </div>
       <div className={styles.table}>
         <div className={styles.rowB}>

@@ -20,7 +20,7 @@ const Layout:FC<React.PropsWithChildren> = ({ children }) => {
       setLoaded(true);
     })
     .catch((e: any) => {
-      if(e.response.data.message) {
+      if(e?.response?.data?.message) {
         toast.error(e.response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });

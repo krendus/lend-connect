@@ -21,22 +21,8 @@ const Profile = () => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [username, setUsername] = useState("");
-    const [profilePic, setProfilePic] = useState("")
+    const [profilePic, setProfilePic] = useState("");
   
-    const getLocation = () => {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-        }, function (error) {
-          console.error("Error getting geolocation:", error);
-        },
-        { enableHighAccuracy: true } 
-        );
-      } else {
-        console.error("Geolocation is not supported by your browser.");
-      }
-    };
     const becomeAnAgent = () => {
         if(loading) return;
         setLoading(true);

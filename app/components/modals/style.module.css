@@ -1,0 +1,69 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal {
+    background: #fff;
+    width: 95%;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 400px;
+    height: 80vh;
+    max-height: 600px;
+    overflow-y: scroll;
+    box-sizing: content-box;
+    margin: 20px;
+    position: relative;
+}
+.close {
+    border: none;
+    background: transparent;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    cursor: pointer;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.inputContainer label {
+    font-size: 14px;
+    color: #777;
+    font-weight: 500;
+}
+.inputContainer input, .inputContainer select {
+    height: 40px;
+    background: transparent;
+    border-radius: 99px;
+    border: 1px solid rgba(42, 41, 57, 0.1);
+    padding: 7px 15px;
+    font-size: 14px;
+    outline: none;
+    color: #000;
+    margin-top: 5px;
+}
+.submitBtn {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    border-radius: 99px;
+    border: none;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    background: #000;
+}
