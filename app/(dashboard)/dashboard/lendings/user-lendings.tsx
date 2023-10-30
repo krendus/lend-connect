@@ -3,12 +3,13 @@ import styles from '../../../styles/dashboard.module.css';
 import { fetchAgentAssignedLendings } from '@/app/api/agent';
 import { toast } from 'react-toastify';
 import { Dots } from 'react-activity';
+import { getLendings } from '@/app/api/loans';
 
 const UserLendings = () => {
   const [lendings, setLendings] = useState([]);
   const [loading, setLoading] = useState(true);
   const fetchLendings = () => {
-    fetchAgentAssignedLendings()
+    getLendings()
     .then((res) => {
         setLendings(res.data.data.data)
         setLoading(false);
