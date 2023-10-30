@@ -1,6 +1,6 @@
-"use client"
 import React from 'react'
 import Lendings from './lendings'
+import { Metadata } from 'next'
 
 const Page = () => {
   return (
@@ -8,4 +8,8 @@ const Page = () => {
   )
 }
 
-export default Page
+export const metadata: Metadata =  {
+  title: "Lend Connect | Lendings"
+}
+
+export default Page;
