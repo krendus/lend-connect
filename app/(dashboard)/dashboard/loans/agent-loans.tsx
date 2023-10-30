@@ -66,7 +66,7 @@ const UserLoans = () => {
               </div>
             ))
             : (
-              <div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}>No lendings</div>
+              <div style={{ display: "flex", margin: "20px 0", justifyContent: "center" }}>No loans</div>
             )
           )
         }
