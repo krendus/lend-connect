@@ -78,7 +78,7 @@ const Login = () => {
                  onChange={(e) => setPassword(e.target.value)}
                  />
             </div>
-            <p className={styles.notifyText}>Already have an account? <Link href={"/register"}>Register</Link></p>
+            <p className={styles.notifyText}>Don&apos;t have an account? <Link href={"/register"}>Register</Link></p>
             <button className={styles.submitBtn} onClick={handleLogin}>{loading ? <Dots color='#fff'/> : "Login"}</button>
         </form>
     </div>
